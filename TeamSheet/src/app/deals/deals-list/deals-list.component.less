@@ -1,0 +1,44 @@
+@import url("../../../assets/css/colors");
+
+
+.deals-list {
+	display: flex; flex-wrap: wrap; width: 100%; justify-content: flex-start;
+}
+.deal {
+	display: flex; flex-direction: column;
+
+}
+.deals-controls {
+	padding: 1em 0;
+	border-bottom: solid 1px #ccc;
+	font-size: 0.75m;
+	.control {
+		font-size: .75em;
+		&-icon { display: inline-block;  margin:-.2em .5em 0 0; font-size: 1.5em; line-height: .666em; vertical-align: middle; }
+	}
+}
+
+
+@media (orientation:landscape){
+	.deals-list {
+		gap: 2em 2em; padding: 4em 0;
+
+		.deal {
+			min-height: calc(100% - 2em);
+			margin-bottom: 2em;
+		}
+	}
+
+	.deals-controls { text-align: right; }
+
+}
+
+@media (orientation:portrait){
+	.deals-list {
+		gap: 1em 0; padding: 2em 0;
+		.deal {
+			min-height: calc(100% - 1em);
+			margin-bottom: 1em;
+		}
+	}
+}

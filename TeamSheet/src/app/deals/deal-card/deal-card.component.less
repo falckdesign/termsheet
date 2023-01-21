@@ -1,0 +1,63 @@
+@import url(../../../assets/css/colors);
+
+.deal-card {
+	flex:1; min-height: 100%;
+	background-color: rgb(245,245,245);
+	border-radius: .5rem; border-color: rgb(230,230,230);
+
+	.card-header {
+
+	}
+	.card-body {
+		padding: 1rem;
+	}
+}
+.deal-card-info {
+	display: flex; flex-wrap: wrap;
+}
+.deal-name { flex: 100%; padding: 0; margin: 0; font-size: 1.2rem; font-weight: 700; color: @Blue1; }
+
+.deal-address {
+	flex: 100%;
+}
+.info-item {
+	display: grid;
+	grid-template-areas: 'icon legend'
+						'icon value';
+	grid-template-columns: 30px auto;
+	grid-template-rows: auto auto;
+}
+.info-icon {
+	grid-area: icon;
+	margin-right: .25em; font-size: 1.25em; color: @Blue1Shade;
+}
+.info-legend {
+	grid-area: legend;
+	font-size: .8em; font-weight: 700;
+}
+.info-value {
+	grid-area: value;
+}
+
+
+
+@media (orientation:landscape){
+	.deal-card-info {
+		gap: 1em 1em;
+	}
+	.deal-price { flex: 1.1; }
+
+	.deal-noi { flex: 1; }
+
+	.deal-cap { flex: 0; }
+
+}
+
+@media (orientation:portrait){
+	.deal-card-info {
+		gap: 1em 0;
+	}
+	.info-item  { flex:100%; }
+
+	.info-legend { display: inline-block; }
+}

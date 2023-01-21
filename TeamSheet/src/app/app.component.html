@@ -1,41 +1,11 @@
-<main>
-	<header>
-		<div class="container">
-			<div class="row">
-				<div class="col-auto">
-					<strong>TeamSheet</strong>
-				</div>
-				<div class="col">
-					<div class="user">
-						Hello, <span class="user-name">Alexandre!</span>
-					</div>
-				</div>
-				<div class="col-auto">
-					<div class="action-list">
-						<span class="action action-user">
-							<i class="bi bi-person-gear"></i>
-						</span>
-						<span class="action action-signout">
-							<i class="bi bi-box-arrow-right"></i>
-						</span>
-					</div>
-				</div>
+<main id="MainContainer">
+	<app-header id="Header"></app-header>
 
-			</div>
-
-		</div>
-
-	</header>
-
-	<section>
+	<section id="DealsList">
 		<app-deals-list></app-deals-list>
 	</section>
 
-	<footer>
-		<div class="container">
-			Footer
-		</div>
-	</footer>
+	<app-footer id="Footer"></app-footer>
 </main>
 
 <router-outlet></router-outlet>

@@ -1,1 +1,36 @@
-<p>deal-card works!</p>
+<div class="card deal-card" *ngIf="deal">
+	<div class="card-header">
+		<h2 class="card-title deal-name">
+			{{deal.DEAL_NAME}}
+		</h2>
+	</div>
+	<div class="card-body">
+		<div class="deal-card-info">
+			<div class="info-item deal-address">
+				<i class="info-icon bi bi-geo-alt"></i>
+				<span class="info-value">{{deal.ADRESS}}</span>
+			</div>
+			<div class="info-item deal-price">
+				<i class="info-icon bi bi-cash-stack"></i>
+				<div class="info-legend">
+					Purchase price:
+				</div>
+				<span class="info-value">{{deal.PURCHASE_PRICE | currency}}</span>
+			</div>
+			<div class="info-item deal-noi">
+				<i class="info-icon bi bi-coin"></i>
+				<div class="info-legend">
+					NOI:
+				</div>
+				<span class="info-value">{{deal.NOI | currency}}</span>
+			</div>
+			<div class="info-item deal-cap">
+				<i class="info-icon bi bi-percent"></i>
+				<div class="info-legend">
+					Cap:
+				</div>
+				<span class="info-value">{{ deal.NOI / deal.PURCHASE_PRICE / 100 | percent:'1.1-2'}}</span>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,38 @@
+@import url("../../assets/css/colors");
+
+header {}
+
+.logo {
+	font-family: 'Oswald', sans-serif; font-weight: 900;
+	color: @Blue1;
+}
+
+.user {
+
+}
+
+.action-list {
+	display: flex; width: 100%; justify-content: flex-end; gap: 0 1em;
+	.action {
+		&-icon {
+			cursor: pointer;
+			font-size: 24px; line-height: 1em;
+			color: @Blue1;
+		}
+	}
+}
+
+@media (orientation:landscape){
+	header {
+		padding: 1em 0;
+		border-bottom: solid 3px @Blue1;
+	}
+
+}
+
+@media (orientation:portrait){
+	header {
+		padding: 1em 0;
+		border-bottom: solid 3px @Blue1;
+	}
+}

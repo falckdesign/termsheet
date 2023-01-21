@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("assets/css/colors");
+html {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px; line-height: 24px;
+}
+
+.btn {
+	&-primary { background-color: @Blue1; }
+	&-outline-primary { border-color: @Blue1; color: @Blue1; }
+	.btn-icon { display: inline-block;  margin:-.2em .5em 0 0; font-size: 1.5em; line-height: .666em; vertical-align: middle; }
+
+}
+
+
+label { display: block; }

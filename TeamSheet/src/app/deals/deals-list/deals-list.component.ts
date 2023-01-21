@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { Deal } from '../models/deal.model';
 
 @Component({
@@ -9,8 +10,8 @@ import { Deal } from '../models/deal.model';
 })
 export class DealsListComponent implements OnInit {
 
-	dealsList:Deal[] = [];
-	showForm:boolean = false;
+	public dealsList:BehaviorSubject<Deal[]> = new BehaviorSubject<Deal[]>([]);
+	public showForm:boolean = false;
 	public formNewDeal:FormGroup;
 
 	constructor(
@@ -25,29 +26,40 @@ export class DealsListComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.dealsList = this.getDeals();
+		this.dealsList.next(this.getDeals());
 	}
 	//#rewgion EVENTS
 	OnClickAddDeal(){
 		this.showForm = true;
 	}
-	OnClickSaveNewDeal(){
-		console.log("this.formNewDeal.conrols: ", this.formNewDeal.controls)
+	OnClickSaveNewDeal():void{
+		//console.log("this.formNewDeal: ", this.formNewDeal);
 		if (this.formNewDeal.invalid) {
-
-			alert("Campos inválidos");
 			return;
-
 		} else {
-			alert("Formulário OK!");
+			this.addDeal();
 			this.closeModal();
 		}
 	}
 	//#endregion
 
 	//#region FUNCTIONS
-	closeModal(){
+	closeModal():void{
+		this.formNewDeal.reset();
 		this.showForm = false;
+	}
+
+	addDeal():void{
+		const Deal:Deal = {
+			DEAL_NAME: this.formNewDeal.get('name')?.value,
+			ADRESS: this.formNewDeal.get('address')?.value,
+			PURCHASE_PRICE: this.formNewDeal.get('purchase_price')?.value,
+			NOI: this.formNewDeal.get('noi')?.value
+		};
+		const currentDealsList = this.dealsList.getValue();
+		currentDealsList.unshift(Deal);
+		this.dealsList.next(currentDealsList);
+		alert("Deal added successfully!");
 	}
 
 	getDeals():Deal[] {
@@ -56,25 +68,25 @@ export class DealsListComponent implements OnInit {
 				DEAL_NAME:'Sweet Mall Deal',
 				ADRESS:'Some Street 321, Chicago, IL',
 				PURCHASE_PRICE:1000000,
-				NOI:900000
+				NOI:105000
 			},
 			{
 				DEAL_NAME:'Some other Real Estate Deal',
 				ADRESS:'Anywhere Av. 456, Chicago, IL',
 				PURCHASE_PRICE:1000000,
-				NOI:900000
+				NOI:110000
 			},
 			{
 				DEAL_NAME:'Cedar Square Residence',
 				ADRESS:'Cedar Street 789, Chicago, IL',
 				PURCHASE_PRICE:1000000,
-				NOI:900000
+				NOI:108000
 			},
 			{
 				DEAL_NAME:'Compact Family Condo',
 				ADRESS:'Happy Family St 963, Chicago, IL',
 				PURCHASE_PRICE:1000000,
-				NOI:900000
+				NOI:120000
 			}
 		];
 

@@ -9,7 +9,7 @@
 	</div>
 	<div class="deals-list">
 		<div class="row">
-			<div class="col-12 col-lg-4" *ngFor="let deal of dealsList">
+			<div class="col-12 col-lg-4" *ngFor="let deal of dealsList | async">
 				<app-deal-card class="deal" [deal]="deal"></app-deal-card>
 			</div>
 		</div>
@@ -26,14 +26,14 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
 				</div>
 				<div class="modal-body">
-					<form [formGroup]="formNewDeal" (ngSubmit)="OnClickSaveNewDeal()">
+					<form [formGroup]="formNewDeal" #ngForm="ngForm" (ngSubmit)="OnClickSaveNewDeal()" [ngClass]="{'submitted' : ngForm.submitted }">
 						<div class="row">
 							<div class="col-12 mb-3">
 								<label>
 									Deal Name
 									<div class="input-group">
 										<span class="input-group-text"><i class="bi bi-house"></i></span>
-										<input type="text" formControlName="name" class="form-control" placeholder="Name / description" aria-label="Deal Name / description" required="required"/>
+										<input type="text" formControlName="name" [controlValidation]="formNewDeal.controls['name']" class="form-control" placeholder="Name / description" aria-label="Deal Name / description"/>
 									</div>
 								</label>
 							</div>
@@ -42,8 +42,9 @@
 									Adress
 									<div class="input-group">
 										<span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-										<input type="text" formControlName="address" class="form-control" placeholder="Adress" aria-label="Adress" required/>
+										<input type="text" formControlName="address" [controlValidation]="formNewDeal.controls['address']" class="form-control" placeholder="Adress" aria-label="Adress"/>
 									</div>
+									<span class="error-msg"></span>
 								</label>
 							</div>
 							<div class="col-12 col-lg-6 mb-3">
@@ -51,8 +52,9 @@
 									Purchase price
 									<div class="input-group">
 										<span class="input-group-text"><i class="info-icon bi bi-cash-stack"></i></span>
-										<input type="number" formControlName="purchase_price" class="form-control" placeholder="000.000,00" aria-label="Purchase Price" required/>
+										<input type="number" formControlName="purchase_price" [controlValidation]="formNewDeal.controls['purchase_price']" class="form-control" placeholder="000.000,00" aria-label="Purchase Price"/>
 									</div>
+									<span class="status-msg"></span>
 								</label>
 							</div>
 							<div class="col-12 col-lg-6 mb-3">
@@ -60,17 +62,18 @@
 									NOI
 									<div class="input-group">
 										<span class="input-group-text"><i class="info-icon bi bi-coin"></i></span>
-										<input type="number" formControlName="noi" class="form-control" placeholder="000.000,00" aria-label="NOI" required/>
+										<input type="number" formControlName="noi" [controlValidation]="formNewDeal.controls['noi']" class="form-control" placeholder="000.000,00" aria-label="NOI"/>
 									</div>
+									<span class="status-msg"></span>
 								</label>
 							</div>
 						</div>
 						<hr>
 						<div class="row">
-							<div class="col">
+							<div class="col-12 col-lg">
 
 							</div>
-							<div class="col col-lg-auto">
+							<div class="col-12 col-lg-auto">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Close</button>
 								<button type="submit" class="btn btn-primary ms-1">Save changes</button>
 							</div>

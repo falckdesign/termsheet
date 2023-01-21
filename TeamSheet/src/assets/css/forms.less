@@ -1,0 +1,26 @@
+form {
+	&:not(.submitted) {
+		.errorMsg-list { display: none; }
+	}
+	&.submitted ::ng-deep{
+		.ng-invalid {
+			border-color: red;
+
+			& ~ .errorMsg-list.invalid-feedback {
+				display: block; position: relative; margin: 0; line-height: 0;
+				.errorMsg { display: inline-block; line-height: 1em; }
+
+				.errorMsg-list-in { position: absolute; left: 0; top: 3px; }
+			}
+		}
+		.input-group {
+			.ng-invalid {
+				& ~ .errorMsg-list.invalid-feedback {
+					.errorMsg-list-in { padding-left: 45px; }
+				}
+			}
+		}
+	}
+}
+
+

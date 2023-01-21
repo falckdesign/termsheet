@@ -13,6 +13,9 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     FooterComponent
   ],
+  exports:[
+
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

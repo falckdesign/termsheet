@@ -14,4 +14,16 @@ html {
 
 label { display: block; }
 
-
+.alert {
+	@keyframes slideIn {
+		0% {
+		  transform: translateY(-100%);
+		}
+		100% {
+		  transform: translateX(0);
+		}
+	  }
+	&.fade.show {
+		animation: .4s ease-out 0s 1 slideIn;
+	}
+}

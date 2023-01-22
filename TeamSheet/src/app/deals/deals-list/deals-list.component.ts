@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
+import { Alert, AlertType } from 'src/app/shared/models/alert.model';
 import { Deal } from '../models/deal.model';
 import { DealsService } from '../services/deals.service';
 
@@ -14,6 +15,7 @@ export class DealsListComponent implements OnInit {
 	public dealsList:BehaviorSubject<Deal[]> = new BehaviorSubject<Deal[]>([]);
 	public showForm:boolean = false;
 	public formNewDeal:FormGroup;
+	public alertList:Alert[] = [];
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -60,10 +62,16 @@ export class DealsListComponent implements OnInit {
 		};
 		this.dealsService.addDeal(Deal).then(()=>{
 			this.dealsList.next(this.dealsService.getDeals());
-			alert("Deal added successfully!");
+			const successAlert:Alert = { TYPE:AlertType.success, TEXT:"Deal added successfully!" }
+			this.alertList.unshift(successAlert);
 		});
 	}
 
+	hideAlert(alert:Alert):void{
+		this.alertList = this.alertList.filter((_alert)=>{
+			return _alert !== alert;
+		});
+	}
 
 	//#endregion
 }

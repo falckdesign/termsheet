@@ -52,7 +52,7 @@
 									Purchase price
 									<div class="input-group">
 										<span class="input-group-text"><i class="info-icon bi bi-cash-stack"></i></span>
-										<input type="number" formControlName="purchase_price" [controlValidation]="formNewDeal.controls['purchase_price']" class="form-control" placeholder="000.000,00" aria-label="Purchase Price"/>
+										<input type="text" formControlName="purchase_price" currencyMask [controlValidation]="formNewDeal.controls['purchase_price']" class="form-control" placeholder="000.000,00" aria-label="Purchase Price"/>
 									</div>
 									<span class="status-msg"></span>
 								</label>
@@ -62,7 +62,7 @@
 									NOI
 									<div class="input-group">
 										<span class="input-group-text"><i class="info-icon bi bi-coin"></i></span>
-										<input type="number" formControlName="noi" [controlValidation]="formNewDeal.controls['noi']" class="form-control" placeholder="000.000,00" aria-label="NOI"/>
+										<input type="text" formControlName="noi" currencyMask [controlValidation]="formNewDeal.controls['noi']" class="form-control" placeholder="000.000,00" aria-label="NOI"/>
 									</div>
 									<span class="status-msg"></span>
 								</label>

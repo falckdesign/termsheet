@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { Deal } from '../models/deal.model';
+import { DealsService } from '../services/deals.service';
 
 @Component({
 	selector: 'app-deals-list',
@@ -16,6 +17,7 @@ export class DealsListComponent implements OnInit {
 
 	constructor(
 		private formBuilder: FormBuilder,
+		private dealsService: DealsService,
 	) {
 		this.formNewDeal = this.formBuilder.group({
 			name: ['', [Validators.required, Validators.maxLength(300)]],
@@ -26,7 +28,7 @@ export class DealsListComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.dealsList.next(this.getDeals());
+		this.dealsList.next(this.dealsService.getDeals());
 	}
 	//#rewgion EVENTS
 	OnClickAddDeal(){
@@ -56,41 +58,12 @@ export class DealsListComponent implements OnInit {
 			PURCHASE_PRICE: this.formNewDeal.get('purchase_price')?.value,
 			NOI: this.formNewDeal.get('noi')?.value
 		};
-		const currentDealsList = this.dealsList.getValue();
-		currentDealsList.unshift(Deal);
-		this.dealsList.next(currentDealsList);
-		alert("Deal added successfully!");
+		this.dealsService.addDeal(Deal).then(()=>{
+			this.dealsList.next(this.dealsService.getDeals());
+			alert("Deal added successfully!");
+		});
 	}
 
-	getDeals():Deal[] {
-		let DealsList:Deal[] = [
-			{
-				DEAL_NAME:'Sweet Mall Deal',
-				ADRESS:'Some Street 321, Chicago, IL',
-				PURCHASE_PRICE:1000000,
-				NOI:105000
-			},
-			{
-				DEAL_NAME:'Some other Real Estate Deal',
-				ADRESS:'Anywhere Av. 456, Chicago, IL',
-				PURCHASE_PRICE:1000000,
-				NOI:110000
-			},
-			{
-				DEAL_NAME:'Cedar Square Residence',
-				ADRESS:'Cedar Street 789, Chicago, IL',
-				PURCHASE_PRICE:1000000,
-				NOI:108000
-			},
-			{
-				DEAL_NAME:'Compact Family Condo',
-				ADRESS:'Happy Family St 963, Chicago, IL',
-				PURCHASE_PRICE:1000000,
-				NOI:120000
-			}
-		];
 
-		return DealsList;
-	}
 	//#endregion
 }
